@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="da-DK">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TS TODO</title>
+    <script type="text/javascript" src="assets/indexeddb.js" defer></script>
+    <link href="assets/indexeddb.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <ts-todo noswipe_ db="myApp,1,todo" actions="Delete,Done,Undo" categories="Urgent,Not urgent,For later"
+        fields="Title,Note,Date & Time" buttons="Add Task,Save" filters="All tasks,Today,Tomorrow,Completed">
+    </ts-todo>
+</body>
+
+</html>

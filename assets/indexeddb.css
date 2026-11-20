@@ -1,0 +1,178 @@
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 14px;
+	font-family: system-ui, sans;
+	padding: 1em;
+}
+
+main,
+ts-todo {
+	display: grid;
+	gap: 5em;
+	align-items: start;
+	grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 500px) {
+
+	main,
+	ts-todo {
+		grid-template-columns: 1fr;
+	}
+}
+
+.data-line+*,
+*+.data-line {
+	margin-block-start: 1em;
+}
+
+[filtering] {
+	display: flex;
+	gap: 1em;
+	margin-block-end: 2em;
+}
+
+[app] {
+	display: grid;
+	gap: 1em;
+}
+
+div[todo] {
+	min-width: 300px;
+	display: flex;
+	gap: 1em;
+	align-items: flex-start;
+
+	& header {
+		font-weight: 700;
+		font-size: 1.3em;
+	}
+
+	&:has([checked]) :is(:not(button)) {
+		text-decoration: line-through;
+	}
+
+	& button {
+		flex-shrink: 0;
+		margin-inline-start: auto;
+	}
+
+}
+
+button {
+	--button-background: #3458C5;
+
+	appearance: none;
+	border: none;
+	background-color: var(--button-background);
+	padding-inline: 1em;
+	padding-block: .5em;
+	line-height: 1.2;
+	color: #ffffff;
+	border-radius: .25em;
+	font-size: inherit;
+	cursor: pointer;
+
+	&:HOVER {
+		background-color: hsl(from var(--button-background) h s calc(l + 10));
+	}
+
+	&:is(:ACTIVE, :FOCUS) {
+		background-color: hsl(from var(--button-background) h s calc(l - 10));
+	}
+}
+
+div[swipe] {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	container-type: inline-size;
+	scrollbar-width: none;
+
+	> :not(:nth-child(2)) {
+		white-space: nowrap;
+	}
+
+	> :nth-child(2) {
+		width: 100cqw;
+		scroll-snap-align: center;
+	}
+}
+
+ts-todo[noswipe] {
+	div[swipe] {
+		display: flex;
+		gap: 1em;
+
+		> :not(:nth-child(2)) {
+			width: auto;
+			order: 2;
+		}
+
+		> :nth-child(2) {
+			width: 100%;
+			order: 1;
+		}
+	}
+}
+
+[mark] {
+	width: clamp(35cqw, 5em + 5cqw, 20cqw);
+	height: 100%;
+	--button-background: #080;
+}
+
+[del] {
+	width: clamp(35cqw, 5em + 5cqw, 20cqw);
+	height: 100%;
+	--button-background: #800;
+}
+
+.data-line {
+	display: grid;
+	gap: .5em;
+}
+
+.data-line label {
+	font-weight: 700;
+	font-size: .85em;
+	font-family: inherit;
+}
+
+.data-line :is(input, textarea, select) {
+	appearance: none;
+	padding-inline: .5em;
+	padding-block: .5em;
+	font-family: inherit;
+	font-size: inherit;
+	border: 1px solid #dddddd;
+	border-radius: .25rem;
+	width: 100%;
+}
+
+.data-line select {
+	background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20640%22%3E%3Cpath%20d%3D%22M130.4%20268.2C135.4%20280.2%20147%20288%20160%20288L480%20288C492.9%20288%20504.6%20280.2%20509.6%20268.2C514.6%20256.2%20511.8%20242.5%20502.7%20233.3L342.7%2073.3C330.2%2060.8%20309.9%2060.8%20297.4%2073.3L137.4%20233.3C128.2%20242.5%20125.5%20256.2%20130.5%20268.2zM130.4%20371.7C125.4%20383.7%20128.2%20397.4%20137.3%20406.6L297.3%20566.6C309.8%20579.1%20330.1%20579.1%20342.6%20566.6L502.6%20406.6C511.8%20397.4%20514.5%20383.7%20509.5%20371.7C504.5%20359.7%20492.9%20352%20480%20352L160%20352C147.1%20352%20135.4%20359.8%20130.4%20371.8z%22%2F%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	background-position: right .5em center;
+	background-size: auto 60%;
+}
+
+button[type="submit"] {
+	appearance: none;
+	padding-inline: .5em;
+	padding-block: .5em;
+	font-family: inherit;
+	font-size: inherit;
+	border: 1px solid #dddddd;
+	background-color: blue;
+	color: #ffffff;
+	border-radius: .25rem;
+}
